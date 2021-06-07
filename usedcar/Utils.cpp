@@ -15,21 +15,26 @@
 using namespace CarUtils;
 
 std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::time_point car_reg_time){
+    try{
+        //Compute time diff between adding on the car in shop until now
+        auto time_now = std::chrono::system_clock::now();
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(time_now - car_reg_time );
+        auto timeIntervalSellUntillNow = seconds.count();
+        
+        //Compute dynamic price
+        double priceThreshold = car_price - car_price*0.2;
+        double dynamicPrice = car_price;
+        
+        while(dynamicPrice>priceThreshold && timeIntervalSellUntillNow>0){
+            dynamicPrice -= dynamicPrice*0.01;
+            timeIntervalSellUntillNow -= 10;
+        }
+        return std::to_string(dynamicPrice);
 
-    //Compute time diff between adding on the car in shop until now
-    auto time_now = std::chrono::system_clock::now();
-    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(time_now - car_reg_time );
-    auto timeIntervalSellUntillNow = seconds.count();
-    
-    //Compute dynamic price
-    double priceThreshold = car_price - car_price*0.2;
-    double dynamicPrice = car_price;
-    
-    while(dynamicPrice>priceThreshold && timeIntervalSellUntillNow>0){
-        dynamicPrice -= dynamicPrice*0.01;
-        timeIntervalSellUntillNow -= 10;
+    }catch(...){
+        std::cout << "Error while calculating  \n";
+        return std::string();;
     }
-    return std::to_string(dynamicPrice);
 }
 
 void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {

@@ -13,14 +13,12 @@ using namespace CarUtils;
 
 void menuUtils::displayMenu() {
     std::cout << "***************************************\n";
-    std::cout << "***************************************\n";
     std::cout << menu_option::add_car << ": Add a Car\n";
     std::cout << menu_option::sell_car << ": Sell a Car\n";
     std::cout << menu_option::display_all_cars << ": Display all listings\n";
     std::cout << menu_option::display_end_of_the_day << ": Display End of Day\n";
     std::cout << menu_option::display_menu << ": Display menu options\n";
     std::cout << menu_option::quit << ": Exit the application and quit\n";
-    std::cout << "***************************************\n";
     std::cout << "***************************************\n";
 }
     

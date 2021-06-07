@@ -30,6 +30,7 @@ namespace UsedCarshop{
         std::size_t numberOfCars();
         std::size_t numberOfCarsSold();
         double daysEarning();
+        
         void displayCars();
         void displayCarsSold();
 

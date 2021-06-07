@@ -28,9 +28,9 @@ void CarShop::addCar ( Car car )
     do {
         id = std::to_string(distr(eng));
     } while (_cars.count(id)<0);
-    
+
     //add car on Used Car map
-    auto [ position, success ] = _cars.emplace( std::move(id), std::move(car) );
+    auto [ position, success ] = _cars.try_emplace( std::move(id), std::move(car) );
     if (!success)
     {
         std::cout << "Unable to add car\n";
@@ -43,14 +43,18 @@ void CarShop::sellCar ( const std::string& id )
     if ( _cars.find(id) == _cars.end() ) {
         std::cout << "Unable to find the car you want to sell\n";
     } else {
-        auto car = findCar(id);
-        auto it = _cars.find(id);
-        //update the price with the price sold
-        it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
-        //insert the car into sold cars map
-        _soldCars.emplace(std::move(id), std::move(it->second));
-        //remove car from inventory
-        _cars.erase(id);
+        try{
+            auto car = findCar(id);
+            auto it = _cars.find(id);
+            //update the price with the price sold
+            it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
+            //insert the car into sold cars map
+            _soldCars.try_emplace(std::move(id), std::move(it->second));
+            //remove car from inventory
+            _cars.erase(id);
+        }catch(...){
+            std::cout << "Error while trying to sell Car\n";
+        }
     }
 }
 
@@ -62,9 +66,14 @@ std::optional<Car> CarShop::findCar(const std::string &id) const {
 
 double CarShop::daysEarning() {
     double sum = 0;
-    for (auto it = _soldCars.begin(); it != _soldCars.end(); it++ )
-    {
-        sum += it->second._price;
+    try{
+        for (auto it = _soldCars.begin(); it != _soldCars.end(); it++ )
+        {
+            sum += it->second._price;
+        }
+    }
+    catch(...){
+        std::cout << "Error while calculating earnings\n";
     }
     return sum;
 }
