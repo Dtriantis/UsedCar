@@ -21,19 +21,21 @@ std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::
         auto seconds = std::chrono::duration_cast<std::chrono::seconds>(time_now - car_reg_time );
         auto timeIntervalSellUntillNow = seconds.count();
         
-        //Compute dynamic price
-        double priceThreshold = car_price - car_price*0.2;
-        double dynamicPrice = car_price;
-        
-        while(dynamicPrice>priceThreshold && timeIntervalSellUntillNow>0){
-            dynamicPrice -= dynamicPrice*0.01;
-            timeIntervalSellUntillNow -= 10;
+        if(timeIntervalSellUntillNow > 30){
+            //Compute dynamic price
+            double priceThreshold = car_price - car_price*0.2;
+            double dynamicPrice = car_price;
+            
+            while(dynamicPrice>priceThreshold && timeIntervalSellUntillNow>30){
+                dynamicPrice -= dynamicPrice*0.01;
+                timeIntervalSellUntillNow -= 10;
+            }
+            return std::to_string(dynamicPrice);
         }
-        return std::to_string(dynamicPrice);
-
+        return std::to_string(car_price);
     }catch(...){
         std::cout << "Error while calculating  \n";
-        return std::string();;
+        return std::string();
     }
 }
 
