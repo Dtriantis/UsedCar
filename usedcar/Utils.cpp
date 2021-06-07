@@ -56,7 +56,7 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
           break;
       } else {
           // not valid price
-          std::cout << "Invalid Input! Please input a numerical value." << std::endl;
+          std::cout << "Invalid Input! Please input a numerical value for car's Price." << std::endl;
           std::cin.clear();
           while (std::cin.get() != '\n') ; // empty loop
       }
@@ -69,7 +69,7 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
           break;
       } else {
           // not valid year
-          std::cout << "Invalid Input! Please input a numerical value." << std::endl;
+          std::cout << "Invalid Input! Please input a numerical value for car's Year." << std::endl;
           std::cin.clear();
           while (std::cin.get() != '\n') ; // empty loop
       }
