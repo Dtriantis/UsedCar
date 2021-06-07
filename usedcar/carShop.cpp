@@ -39,28 +39,25 @@ void CarShop::addCar ( Car car )
 
 void CarShop::sellCar ( const std::string& id )
 {
-    //put car in Cars sold map
-    auto car = findCar(id);
-    auto it = _cars.find(id);
-    it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
-    _soldCars.emplace(std::move(id), std::move(it->second));
-
-    //try - catch
-    _cars.erase(id);
+    //find car in _cars
+    if ( _cars.find(id) == _cars.end() ) {
+        std::cout << "Unable to find the car you want to sell\n";
+    } else {
+        auto car = findCar(id);
+        auto it = _cars.find(id);
+        //update the price with the price sold
+        it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
+        //insert the car into sold cars map
+        _soldCars.emplace(std::move(id), std::move(it->second));
+        //remove car from inventory
+        _cars.erase(id);
+    }
 }
 
 std::optional<Car> CarShop::findCar(const std::string &id) const {
     auto it = _cars.find(id);
     if(it == _cars.end()){return std::nullopt;}
     return it->second;
-}
-
-std::size_t CarShop::numberOfCars() {
-    return _cars.size();
-}
-
-std::size_t CarShop::numberOfCarsSold() {
-    return _soldCars.size();
 }
 
 double CarShop::daysEarning() {
@@ -72,6 +69,14 @@ double CarShop::daysEarning() {
     return sum;
 }
 
+std::size_t CarShop::numberOfCars() {
+    return _cars.size();
+}
+
+std::size_t CarShop::numberOfCarsSold() {
+    return _soldCars.size();
+}
+
 void CarShop::displayCars() {
     for(auto&& [id, car] : _cars){
         std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
@@ -79,6 +84,6 @@ void CarShop::displayCars() {
 }
 void CarShop::displayCarsSold() {
     for(auto&& [id, car] : _soldCars){
-        std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
+        std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  car._price <<  '\n';
     }
 }

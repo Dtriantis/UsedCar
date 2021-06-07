@@ -20,8 +20,5 @@ std::string currentPrice(double car_price,std::chrono::system_clock::time_point 
 
 void addUsedCar( UsedCarshop::CarShop & carShop );
 void sellUsedCar( UsedCarshop::CarShop & carShop );
-void displayCars( UsedCarshop::CarShop & carShop );
-
-
 }
 #endif /* Utils_hpp */

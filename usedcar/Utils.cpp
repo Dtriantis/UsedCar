@@ -36,26 +36,47 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
     unsigned int year = 0;
     double price = 0;
     std::string model;
-
     std::cin.ignore();
-
+    
     std::cout << "Enter Car model: \n";
-    std::getline( std::cin, model );
+    while(true){
+        std::getline( std::cin, model );
+        if(model.size()>0){break;}
+        else{
+            std::cout << "Input Empty! Please provide a car model" << std::endl;
+            std::cin.clear();
+            while (std::cin.get() != '\n') ; // empty loop
+        }
+    }
 
     std::cout << "Enter car price: \n";
-    std::cin >> price;
-    if (std::cin.fail()) {
-        std::cout << "Wrong input for Cars's PRICE, Please provide an integer \n";
+    while (true) {
+      if (std::cin >> price && price > 0) {
+          // valid price
+          break;
+      } else {
+          // not valid price
+          std::cout << "Invalid Input! Please input a numerical value." << std::endl;
+          std::cin.clear();
+          while (std::cin.get() != '\n') ; // empty loop
+      }
     }
 
     std::cout << "Enter the car year: \n";
-    std::cin >> year;
-    if (std::cin.fail()) {
-        std::cout << "Wrong input for Cars's YEAR, Please provide an integer \n";
+    while (true) {
+      if (std::cin >> year && year > 0) {
+          // valid year
+          break;
+      } else {
+          // not valid year
+          std::cout << "Invalid Input! Please input a numerical value." << std::endl;
+          std::cin.clear();
+          while (std::cin.get() != '\n') ; // empty loop
+      }
     }
     
     auto registrationTimepoint = std::chrono::system_clock::now();
-    if(year>0 && price>0 && model.size()!=0){
+    if(model.size()!=0){
         Car car = {
             model,
             year,
@@ -71,7 +92,7 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
 void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
     std::size_t numCars = carShop.numberOfCars();
     if( numCars == 0 ) {
-        std::cout << "\nThere are 0 cars; nothing to remove.\n";
+        std::cout << "\nThere are 0 cars; nothing to Sell.\n";
         return;
     }
     std::string id;
@@ -80,15 +101,4 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
     std::getline( std::cin, id );
     carShop.sellCar(std::move(id));
     std::cout << "Car Sold";
-}
-
-void displayCars( UsedCarshop::CarShop & carShop ) {
-    std::size_t numCars = carShop.numberOfCars();
-    if( numCars == 0 ) {
-        std::cout << "There are 0 cars in Shop\n";
-        return;
-    }else{
-        return;
-    }
-
 }
