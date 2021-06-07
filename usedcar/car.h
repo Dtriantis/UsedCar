@@ -19,6 +19,6 @@ struct Car {
 };
 
 bool operator==( const Car& first, const Car& other );
-// std::ostream& operator<<( std::ostream& out, const Car& car );
+std::ostream& operator<<( std::ostream& out, const Car& car );
 
 #endif /* car_h */

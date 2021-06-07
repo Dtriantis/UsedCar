@@ -14,12 +14,16 @@ using namespace CarUtils;
 using namespace UsedCarshop;
 using namespace menuUtils;
 
+ void initialiseShop();
+
 int main(int argc, const char * argv[]) {
     
+    initialiseShop();
+
     UsedCarshop::CarShop carshop;
     std::cout << "Hello, Welcome to Used Cars !\n";
     menuUtils::displayMenu();
-
+    
     int option = 0;
     do {
         std::cout << "\nChoose an option from the menu ";
@@ -35,4 +39,35 @@ int main(int argc, const char * argv[]) {
     std::cout << "\nPress any key and enter to quit.\n";
     std::cin.get();
     return 0;
+}
+
+void initialiseShop(){
+    
+    UsedCarshop::CarShop carshop;
+    //Init shop
+    auto registrationTimepoint = std::chrono::system_clock::now();
+    Car car = {
+        "Renault Clio",
+        1999,
+        1500,
+        registrationTimepoint
+    };
+
+    Car car2 = {
+        "Opel Corsa",
+        2010,
+        7000,
+        registrationTimepoint
+    };
+
+    Car car3 = {
+        "Audi A3",
+        2017,
+        15000,
+        registrationTimepoint
+    };
+    
+    carshop.addCar( std::move(car) );
+    carshop.addCar( std::move(car2) );
+    carshop.addCar( std::move(car3) );
 }

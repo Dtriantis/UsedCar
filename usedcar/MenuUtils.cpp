@@ -58,23 +58,23 @@ auto menuUtils::get_menu()
 bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
 
     switch( static_cast<unsigned int>(option) ) {
-        case 1: {
+        case menu_option::add_car: {
             addUsedCar( carShop );
             std::cout << "\nYou have entered a car into the Shop.\n";
             menuUtils::displayMenu();
             break;
         }
-        case 2: {
+        case menu_option::sell_car: {
             if( carShop.numberOfCars() > 0 ) {
                 sellUsedCar( carShop );
-                std::cout << "\nYou have sell a car.\n";
+                std::cout << "\nYou have sold a car.\n";
                 menuUtils::displayMenu();
             } else {
                 std::cout << "\nThere are no cars in the Shop.\n";
             }
             break;
         }
-        case 3: {
+        case menu_option::display_all_cars: {
             std::size_t numberOfCars = carShop.numberOfCars();
             if( numberOfCars > 0 ) {
                 carShop.displayCars();
@@ -83,22 +83,23 @@ bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
             }
             break;
         }
-        case 4: {
+        case menu_option::display_end_of_the_day: {
             std::size_t numberOfCars = carShop.numberOfCars();
             std::size_t numberOfCarsSold = carShop.numberOfCarsSold();
             if( numberOfCars > 0 && numberOfCarsSold > 0) {
-                carShop.displayCars();
+                std::cout << "Cars sold today.\n";
                 carShop.displayCarsSold();
+                std::cout << "Income earned today: \n" << carShop.daysEarning() << "\n";
             } else {
                 std::cout << "\nThere are no cars sold today.\n";
             }
             break;
         }
-        case 5: {
+        case menu_option::display_menu: {
             menuUtils::displayMenu();
             break;
         }
-        case 6: {
+        case menu_option::quit: {
             return false;
         }
         default: {

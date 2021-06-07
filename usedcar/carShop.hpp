@@ -23,12 +23,13 @@ namespace UsedCarshop{
         CarsMap _cars;
         SoldCarsMap _soldCars;
     public:
-        void addCar ( std::string id, Car car );
+        void addCar ( Car car );
         void sellCar ( const std::string& id );
 
         std::optional<Car> findCar( const std::string& id ) const;
         std::size_t numberOfCars();
         std::size_t numberOfCarsSold();
+        double daysEarning();
         void displayCars();
         void displayCarsSold();
 

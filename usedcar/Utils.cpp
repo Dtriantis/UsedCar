@@ -18,16 +18,16 @@ std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::
 
     //Compute time diff between adding on the car in shop until now
     auto time_now = std::chrono::system_clock::now();
-    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(car_reg_time - time_now);
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(time_now - car_reg_time );
     auto timeIntervalSellUntillNow = seconds.count();
     
     //Compute dynamic price
-    double priceThreshold = car_price - car_price*0.8;
+    double priceThreshold = car_price - car_price*0.2;
     double dynamicPrice = car_price;
     
-    while(dynamicPrice<priceThreshold && timeIntervalSellUntillNow>0){
-        dynamicPrice -= dynamicPrice*0.99;
-        timeIntervalSellUntillNow-=10;
+    while(dynamicPrice>priceThreshold && timeIntervalSellUntillNow>0){
+        dynamicPrice -= dynamicPrice*0.01;
+        timeIntervalSellUntillNow -= 10;
     }
     return std::to_string(dynamicPrice);
 }
@@ -35,35 +35,37 @@ std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::
 void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
     unsigned int year = 0;
     double price = 0;
-    std::string model, carID;
+    std::string model;
 
     std::cin.ignore();
 
-    std::cout << "Enter car ID: ";
-    std::getline( std::cin, carID );
-
-    std::cout << "Enter Car model: ";
+    std::cout << "Enter Car model: \n";
     std::getline( std::cin, model );
 
-    std::cout << "Enter car price: ";
+    std::cout << "Enter car price: \n";
     std::cin >> price;
+    if (std::cin.fail()) {
+        std::cout << "Wrong input for Cars's PRICE, Please provide an integer \n";
+    }
 
-    std::cout << "Enter the car year: ";
+    std::cout << "Enter the car year: \n";
     std::cin >> year;
+    if (std::cin.fail()) {
+        std::cout << "Wrong input for Cars's YEAR, Please provide an integer \n";
+    }
     
     auto registrationTimepoint = std::chrono::system_clock::now();
-    if(year!=0 && price!=0 && model.size()!=0 && carID.size()!=0){
+    if(year>0 && price>0 && model.size()!=0){
         Car car = {
             model,
             year,
             price,
             registrationTimepoint
         };
-        carShop.addCar( std::move(carID), std::move(car)  );
+        carShop.addCar( std::move(car) );
     }else{
         std::cout << "You missed to give all info please try adding the car again ";
     }
-
 }
 
 void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
@@ -73,7 +75,6 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
         return;
     }
     std::string id;
-
     std::cin.ignore();
     std::cout << "Enter Car ID you want to sell ";
     std::getline( std::cin, id );
@@ -84,7 +85,7 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
 void displayCars( UsedCarshop::CarShop & carShop ) {
     std::size_t numCars = carShop.numberOfCars();
     if( numCars == 0 ) {
-        std::cout << "\nThere are 0 cars in Shop\n";
+        std::cout << "There are 0 cars in Shop\n";
         return;
     }else{
         return;

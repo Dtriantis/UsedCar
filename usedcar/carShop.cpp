@@ -7,41 +7,44 @@
 
 #include <chrono>
 #include <ctime>
+#include <iomanip>
+#include <random>
 
 #include "carShop.hpp"
 #include "Utils.hpp"
 
+constexpr int MIN = 1;
+constexpr int MAX = 10000;
+
 //using namespace CarUtils;
 using namespace UsedCarshop;
 
-void CarShop::addCar ( std::string id, Car car )
+void CarShop::addCar ( Car car )
 {
-    //create and fill registration time and date here
-//    std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
-//    std::time_t t = std::chrono::system_clock::to_time_t(p);
-    
-   // car._registrationDateTime = std::ctime(&t);
+    std::string id;
+    std::random_device rd;
+    std::default_random_engine eng(rd());
+    std::uniform_int_distribution<int> distr(MIN, MAX);
+    do {
+        id = std::to_string(distr(eng));
+    } while (_cars.count(id)<0);
     
     //add car on Used Car map
-  //  auto [ position, success ] = _cars.emplace( std::move(id), std::move(car) );
-     _cars.emplace( std::move(id), std::move(car) );
-//    if (!success)
-//    {
-//        //ID already in Car map
-//    }
+    auto [ position, success ] = _cars.emplace( std::move(id), std::move(car) );
+    if (!success)
+    {
+        std::cout << "Unable to add car\n";
+    }
 }
 
 void CarShop::sellCar ( const std::string& id )
 {
     //put car in Cars sold map
-    //Provlhma mallon me to Auto sto find car
     auto car = findCar(id);
- //   _soldCars.emplace( std::move(id), std::move(car) );
-//    auto [ position, success ] = _soldCars.emplace( std::move(id), std::move(car) );
-//    if (!success)
-//    {
-//        //ID already in Car map
-//    }
+    auto it = _cars.find(id);
+    it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
+    _soldCars.emplace(std::move(id), std::move(it->second));
+
     //try - catch
     _cars.erase(id);
 }
@@ -60,14 +63,22 @@ std::size_t CarShop::numberOfCarsSold() {
     return _soldCars.size();
 }
 
+double CarShop::daysEarning() {
+    double sum = 0;
+    for (auto it = _soldCars.begin(); it != _soldCars.end(); it++ )
+    {
+        sum += it->second._price;
+    }
+    return sum;
+}
+
 void CarShop::displayCars() {
     for(auto&& [id, car] : _cars){
-        std::cout << "Car ID: " << id << '\n' << car._model << car._year << CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
+        std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
     }
 }
 void CarShop::displayCarsSold() {
     for(auto&& [id, car] : _soldCars){
-        std::cout << "Car ID: " << id << '\n' << car._model << car._year << CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
+        std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
     }
 }
-
