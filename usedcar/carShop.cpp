@@ -79,20 +79,20 @@ double CarShop::daysEarning() {
     return sum;
 }
 
-std::size_t CarShop::numberOfCars() {
+std::size_t CarShop::numberOfCars() const {
     return _cars.size();
 }
 
-std::size_t CarShop::numberOfCarsSold() {
+std::size_t CarShop::numberOfCarsSold() const {
     return _soldCars.size();
 }
 
-void CarShop::displayCars() {
+void CarShop::displayCars() const {
     for(auto&& [id, car] : _cars){
         std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
     }
 }
-void CarShop::displayCarsSold() {
+void CarShop::displayCarsSold() const {
     for(auto&& [id, car] : _soldCars){
         std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  car._price <<  '\n';
     }

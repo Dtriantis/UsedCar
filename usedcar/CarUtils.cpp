@@ -15,7 +15,7 @@
 
 using namespace CarUtils;
 
-std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::time_point car_reg_time){
+const std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::time_point car_reg_time){
     try{
         //Compute time diff between adding on the car in shop until now
         auto time_now = std::chrono::system_clock::now();
@@ -71,7 +71,7 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
         std::cin >> year;
     }
     auto registrationTimepoint = std::chrono::system_clock::now();
-    Car car = {
+    const Car car = {
         model,
         year,
         price,
@@ -101,7 +101,7 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
     carShop.sellCar(std::move( std::to_string(id)));
 }
 
-unsigned int CarUtils::getCurrentYear(){
+const unsigned int CarUtils::getCurrentYear(){
     //get current Year
     time_t theTime = time(NULL);
     struct tm *aTime = localtime(&theTime);

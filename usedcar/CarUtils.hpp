@@ -16,11 +16,11 @@
 
 namespace CarUtils{
 
-std::string currentPrice(double car_price,std::chrono::system_clock::time_point car_reg_time);
+const std::string currentPrice(double car_price,std::chrono::system_clock::time_point car_reg_time);
 
 void addUsedCar( UsedCarshop::CarShop & carShop );
 void sellUsedCar( UsedCarshop::CarShop & carShop );
-unsigned int getCurrentYear();
+const unsigned int getCurrentYear();
 
 }
 #endif /* CarUtils_hpp */

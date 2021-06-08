@@ -30,12 +30,12 @@ public:
     void sellCar ( const std::string& id );
     
     std::optional<Car> findCar( const std::string& id ) const;
-    std::size_t numberOfCars();
-    std::size_t numberOfCarsSold();
+    std::size_t numberOfCars() const;
+    std::size_t numberOfCarsSold() const;
     double daysEarning();
     
-    void displayCars();
-    void displayCarsSold();
+    void displayCars() const;
+    void displayCarsSold() const;
     
 };
 }
