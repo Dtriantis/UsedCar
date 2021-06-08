@@ -10,6 +10,5 @@
 
 bool operator==( const Car& first, const Car& other ) {
     return std::tie(first._model, first._price, first._year) ==
-           std::tie(other._model, other._price, other._year);
+    std::tie(other._model, other._price, other._year);
 }
-

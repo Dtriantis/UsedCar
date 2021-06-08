@@ -6,7 +6,7 @@
 //
 
 #include "MenuUtils.hpp"
-#include "Utils.hpp"
+#include "CarUtils.hpp"
 
 using namespace menuUtils;
 using namespace CarUtils;
@@ -21,39 +21,9 @@ void menuUtils::displayMenu() {
     std::cout << menu_option::quit << ": Exit the application and quit\n";
     std::cout << "***************************************\n";
 }
-    
-auto menuUtils::get_menu()
-{
-    while (true)
-    {
-        std::cout << "Choose an option from the menu ";
-
-        auto option = 0;
-        if (std::cin >> option)
-        {
-            switch (option)
-            {
-            case 1: return menu_option::add_car;
-            case 2: return menu_option::sell_car;
-            case 3: return menu_option::display_all_cars;
-            case 4: return menu_option::display_end_of_the_day;
-            case 5: return menu_option::display_menu;
-            case 6: return menu_option::quit;
-            default:
-                std::cout << "Invalid selection please try again.\n";
-            }
-        }
-        else
-        {
-            std::cout << "Please enter a number from 1 to 6 \n";
-            std::cin.clear();
-            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-        }
-    }
-}
 
 bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
-
+    
     switch( static_cast<unsigned int>(option) ) {
         case menu_option::add_car: {
             addUsedCar( carShop );

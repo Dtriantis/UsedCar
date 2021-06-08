@@ -8,13 +8,13 @@
 #include <iostream>
 #include "carShop.hpp"
 #include "MenuUtils.hpp"
-#include "Utils.hpp"
+#include "CarUtils.hpp"
 
 using namespace CarUtils;
 using namespace UsedCarshop;
 using namespace menuUtils;
 
-int main(int argc, const char * argv[]) {
+int main( int argc, const char * argv[] ) {
     
     UsedCarshop::CarShop carshop;
     std::cout << "Hello, Welcome to Used Cars !\n";
@@ -31,7 +31,7 @@ int main(int argc, const char * argv[]) {
         }
         std::cout << '\n';
     } while( menuSelection( option, carshop ) );
-
+    
     std::cout << "\nPress any key and enter to quit.\n";
     std::cin.get();
     return 0;

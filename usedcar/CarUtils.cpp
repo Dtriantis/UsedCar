@@ -1,16 +1,17 @@
 //
-//  Utils.cpp
+//  CarUtils.cpp
 //  usedcar
 //
-//  Created by Dimitris Triantis on 04/06/2021.
+//  Created by Dimitris Triantis on 08/06/2021.
 //
 
 #include <iostream>
 #include <string>
 #include <chrono>
 #include <ctime>
+#include <time.h>
 
-#include "Utils.hpp"
+#include "CarUtils.hpp"
 
 using namespace CarUtils;
 
@@ -43,8 +44,8 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
     unsigned int year = 0;
     double price = 0;
     std::string model;
-    std::cin.ignore();
     
+    std::cin.ignore();
     std::cout << "Enter Car model: \n";
     while(true){
         std::getline( std::cin, model );
@@ -52,34 +53,22 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
         else{
             std::cout << "Input Empty! Please provide a car model" << std::endl;
             std::cin.clear();
-            while (std::cin.get() != '\n') ; // empty loop
+            while (std::cin.get() != '\n'); // empty loop
         }
     }
-
     std::cout << "Enter car price: \n";
-    while (true) {
-      if (std::cin >> price && price > 0) {
-          // valid price
-          break;
-      } else {
-          // not valid price
-          std::cout << "Invalid Input! Please input a numerical value for car's Price." << std::endl;
-          std::cin.clear();
-          while (std::cin.get() != '\n') ; // empty loop
-      }
+    std::cin >> price;
+    while (std::cin.fail() || price < 0) {
+        std::cout << "Invalid Input! Please input a numerical value for car's Price." << std::endl;
+        std::cin.clear();
+        std::cin >> price;
     }
-
-    std::cout << "Enter the car year: \n";
-    while (true) {
-      if (std::cin >> year && year > 0) {
-          // valid year
-          break;
-      } else {
-          // not valid year
-          std::cout << "Invalid Input! Please input a numerical value for car's Year." << std::endl;
-          std::cin.clear();
-          while (std::cin.get() != '\n') ; // empty loop
-      }
+    std::cout << "Enter car year: \n";
+    std::cin >> year;
+    while (std::cin.fail() || year < 0 || year > CarUtils::getCurrentYear()) {
+        std::cout << "Invalid Input! Please provide correct Input for car's Year." << std::endl;
+        std::cin.clear();
+        std::cin >> year;
     }
     auto registrationTimepoint = std::chrono::system_clock::now();
     Car car = {
@@ -110,4 +99,11 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
         }
     }
     carShop.sellCar(std::move( std::to_string(id)));
+}
+
+unsigned int CarUtils::getCurrentYear(){
+    //get current Year
+    time_t theTime = time(NULL);
+    struct tm *aTime = localtime(&theTime);
+    return aTime->tm_year + 1900;
 }

@@ -19,25 +19,25 @@ constexpr int MAX_C = 10000;
 
 namespace UsedCarshop{
 
-    class CarShop {
-        typedef std::unordered_map<std::string, Car> CarsMap;
-        typedef std::unordered_map<std::string, Car> SoldCarsMap;
-    private:
-        CarsMap _cars;
-        SoldCarsMap _soldCars;
-    public:
-        void addCar ( Car car );
-        void sellCar ( const std::string& id );
-
-        std::optional<Car> findCar( const std::string& id ) const;
-        std::size_t numberOfCars();
-        std::size_t numberOfCarsSold();
-        double daysEarning();
-        
-        void displayCars();
-        void displayCarsSold();
-
-    };
+class CarShop {
+    typedef std::unordered_map<std::string, Car> CarsMap;
+    typedef std::unordered_map<std::string, Car> SoldCarsMap;
+private:
+    CarsMap _cars;
+    SoldCarsMap _soldCars;
+public:
+    void addCar ( Car car );
+    void sellCar ( const std::string& id );
+    
+    std::optional<Car> findCar( const std::string& id ) const;
+    std::size_t numberOfCars();
+    std::size_t numberOfCarsSold();
+    double daysEarning();
+    
+    void displayCars();
+    void displayCarsSold();
+    
+};
 }
 
 #endif /* carShop_hpp */

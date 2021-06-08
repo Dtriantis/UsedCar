@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C21BDD2B266D461300DA996B /* MenuUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C21BDD29266D461300DA996B /* MenuUtils.cpp */; };
-		C2EEEADD266A587F00F9A87E /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2EEEADB266A587F00F9A87E /* Utils.cpp */; };
+		C2564457266F7509000F2769 /* CarUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2564455266F7509000F2769 /* CarUtils.cpp */; };
 		C2FA7FDC26666A950080FFD6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FA7FDB26666A950080FFD6 /* main.cpp */; };
 		C2FA7FE6266770F80080FFD6 /* car.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FA7FE5266770F80080FFD6 /* car.cpp */; };
 		C2FA7FEA2668C24D0080FFD6 /* carShop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FA7FE82668C24D0080FFD6 /* carShop.cpp */; };
@@ -29,11 +29,11 @@
 /* Begin PBXFileReference section */
 		C21BDD29266D461300DA996B /* MenuUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MenuUtils.cpp; sourceTree = "<group>"; };
 		C21BDD2A266D461300DA996B /* MenuUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenuUtils.hpp; sourceTree = "<group>"; };
-		C2EEEADB266A587F00F9A87E /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		C2EEEADC266A587F00F9A87E /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
+		C2564455266F7509000F2769 /* CarUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CarUtils.cpp; sourceTree = "<group>"; };
+		C2564456266F7509000F2769 /* CarUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CarUtils.hpp; sourceTree = "<group>"; };
+		C256445B266F75DA000F2769 /* car.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = car.h; sourceTree = "<group>"; };
 		C2FA7FD826666A950080FFD6 /* usedcar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = usedcar; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FA7FDB26666A950080FFD6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		C2FA7FE32666954D0080FFD6 /* car.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = car.h; sourceTree = "<group>"; };
 		C2FA7FE5266770F80080FFD6 /* car.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = car.cpp; sourceTree = "<group>"; };
 		C2FA7FE82668C24D0080FFD6 /* carShop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = carShop.cpp; sourceTree = "<group>"; };
 		C2FA7FE92668C24D0080FFD6 /* carShop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = carShop.hpp; sourceTree = "<group>"; };
@@ -70,14 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				C2FA7FDB26666A950080FFD6 /* main.cpp */,
-				C2FA7FE32666954D0080FFD6 /* car.h */,
 				C2FA7FE5266770F80080FFD6 /* car.cpp */,
 				C2FA7FE82668C24D0080FFD6 /* carShop.cpp */,
 				C2FA7FE92668C24D0080FFD6 /* carShop.hpp */,
-				C2EEEADB266A587F00F9A87E /* Utils.cpp */,
-				C2EEEADC266A587F00F9A87E /* Utils.hpp */,
 				C21BDD29266D461300DA996B /* MenuUtils.cpp */,
 				C21BDD2A266D461300DA996B /* MenuUtils.hpp */,
+				C2564455266F7509000F2769 /* CarUtils.cpp */,
+				C2564456266F7509000F2769 /* CarUtils.hpp */,
+				C256445B266F75DA000F2769 /* car.h */,
 			);
 			path = usedcar;
 			sourceTree = "<group>";
@@ -138,11 +138,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2564457266F7509000F2769 /* CarUtils.cpp in Sources */,
 				C2FA7FEA2668C24D0080FFD6 /* carShop.cpp in Sources */,
 				C2FA7FE6266770F80080FFD6 /* car.cpp in Sources */,
 				C2FA7FDC26666A950080FFD6 /* main.cpp in Sources */,
 				C21BDD2B266D461300DA996B /* MenuUtils.cpp in Sources */,
-				C2EEEADD266A587F00F9A87E /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

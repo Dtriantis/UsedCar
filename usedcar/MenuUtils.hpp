@@ -13,18 +13,17 @@
 
 namespace menuUtils {
 
-    enum menu_option {
-        add_car = 1,
-        sell_car,
-        display_all_cars,
-        display_end_of_the_day,
-        display_menu,
-        quit
-    };
+enum menu_option {
+    add_car = 1,
+    sell_car,
+    display_all_cars,
+    display_end_of_the_day,
+    display_menu,
+    quit
+};
 
-    void displayMenu();
-    bool menuSelection( int option, UsedCarshop::CarShop & carShop );
-    auto get_menu();
+void displayMenu();
+bool menuSelection( int option, UsedCarshop::CarShop & carShop );
 }
 
 #endif /* MenuUtils_hpp */

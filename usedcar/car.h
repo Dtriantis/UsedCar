@@ -2,7 +2,7 @@
 //  car.h
 //  usedcar
 //
-//  Created by Dimitris Triantis on 01/06/2021.
+//  Created by Dimitris Triantis on 08/06/2021.
 //
 
 #ifndef car_h
@@ -19,6 +19,5 @@ struct Car {
 };
 
 bool operator==( const Car& first, const Car& other );
-std::ostream& operator<<( std::ostream& out, const Car& car );
 
 #endif /* car_h */

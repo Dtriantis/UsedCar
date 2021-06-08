@@ -1,12 +1,12 @@
 //
-//  Utils.hpp
+//  CarUtils.hpp
 //  usedcar
 //
-//  Created by Dimitris Triantis on 04/06/2021.
+//  Created by Dimitris Triantis on 08/06/2021.
 //
 
-#ifndef Utils_hpp
-#define Utils_hpp
+#ifndef CarUtils_hpp
+#define CarUtils_hpp
 
 #include <stdio.h>
 #include <string>
@@ -20,5 +20,7 @@ std::string currentPrice(double car_price,std::chrono::system_clock::time_point 
 
 void addUsedCar( UsedCarshop::CarShop & carShop );
 void sellUsedCar( UsedCarshop::CarShop & carShop );
+unsigned int getCurrentYear();
+
 }
-#endif /* Utils_hpp */
+#endif /* CarUtils_hpp */
