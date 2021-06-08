@@ -81,19 +81,14 @@ void CarUtils::addUsedCar( UsedCarshop::CarShop & carShop ) {
           while (std::cin.get() != '\n') ; // empty loop
       }
     }
-    
     auto registrationTimepoint = std::chrono::system_clock::now();
-    if(model.size()!=0){
-        Car car = {
-            model,
-            year,
-            price,
-            registrationTimepoint
-        };
-        carShop.addCar( std::move(car) );
-    }else{
-        std::cout << "You missed to give all info please try adding the car again ";
-    }
+    Car car = {
+        model,
+        year,
+        price,
+        registrationTimepoint
+    };
+    carShop.addCar( std::move(car) );
 }
 
 void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
@@ -102,10 +97,17 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
         std::cout << "\nThere are 0 cars; nothing to Sell.\n";
         return;
     }
-    std::string id;
+    unsigned int id;
     std::cin.ignore();
     std::cout << "Enter Car ID you want to sell ";
-    std::getline( std::cin, id );
-    carShop.sellCar(std::move(id));
-    std::cout << "Car Sold";
+    while(true){
+        if(std::cin >> id && id>MIN_C && id<MAX_C){
+            break;
+        }else{
+            std::cout << "Invalid Input! Please input a numerical value for the car you want to sell." << std::endl;
+            std::cin.clear();
+            while (std::cin.get() != '\n') ; // empty loop
+        }
+    }
+    carShop.sellCar(std::move( std::to_string(id)));
 }

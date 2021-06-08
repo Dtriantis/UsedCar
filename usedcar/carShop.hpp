@@ -14,6 +14,9 @@
 
 #include "car.h"
 
+constexpr int MIN_C = 1;
+constexpr int MAX_C = 10000;
+
 namespace UsedCarshop{
 
     class CarShop {

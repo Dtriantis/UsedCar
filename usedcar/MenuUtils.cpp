@@ -49,7 +49,6 @@ auto menuUtils::get_menu()
             std::cin.clear();
             std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
         }
-
     }
 }
 
@@ -58,14 +57,12 @@ bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
     switch( static_cast<unsigned int>(option) ) {
         case menu_option::add_car: {
             addUsedCar( carShop );
-            std::cout << "\nYou have entered a car into the Shop.\n";
             menuUtils::displayMenu();
             break;
         }
         case menu_option::sell_car: {
             if( carShop.numberOfCars() > 0 ) {
                 sellUsedCar( carShop );
-                std::cout << "\nYou have sold a car.\n";
                 menuUtils::displayMenu();
             } else {
                 std::cout << "\nThere are no cars in the Shop.\n";
@@ -73,8 +70,7 @@ bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
             break;
         }
         case menu_option::display_all_cars: {
-            std::size_t numberOfCars = carShop.numberOfCars();
-            if( numberOfCars > 0 ) {
+            if( carShop.numberOfCars() > 0 ) {
                 carShop.displayCars();
             } else {
                 std::cout << "\nThere is no car in the shop.\n";
@@ -82,9 +78,7 @@ bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
             break;
         }
         case menu_option::display_end_of_the_day: {
-            std::size_t numberOfCars = carShop.numberOfCars();
-            std::size_t numberOfCarsSold = carShop.numberOfCarsSold();
-            if( numberOfCars > 0 && numberOfCarsSold > 0) {
+            if( carShop.numberOfCarsSold() > 0) {
                 std::cout << "Cars sold today.\n";
                 carShop.displayCarsSold();
                 std::cout << "Income earned today: \n" << carShop.daysEarning() << "\n";

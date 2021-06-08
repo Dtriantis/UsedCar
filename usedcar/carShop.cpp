@@ -13,9 +13,6 @@
 #include "carShop.hpp"
 #include "Utils.hpp"
 
-constexpr int MIN = 1;
-constexpr int MAX = 10000;
-
 //using namespace CarUtils;
 using namespace UsedCarshop;
 
@@ -24,16 +21,19 @@ void CarShop::addCar ( Car car )
     std::string id;
     std::random_device rd;
     std::default_random_engine eng(rd());
-    std::uniform_int_distribution<int> distr(MIN, MAX);
+    std::uniform_int_distribution<int> distr(MIN_C, MAX_C);
+    //create an Id in MIN - MAX range which does not exist on _cars or _soldCars
     do {
         id = std::to_string(distr(eng));
-    } while (_cars.count(id)<0);
+    } while (_cars.count(id)<0 && _soldCars.count(id)<0);
 
     //add car on Used Car map
     auto [ position, success ] = _cars.try_emplace( std::move(id), std::move(car) );
     if (!success)
     {
         std::cout << "Unable to add car\n";
+    }else{
+        std::cout << "You have successfuly entered Car with ID: " << id << " in the Shop";
     }
 }
 
@@ -52,6 +52,7 @@ void CarShop::sellCar ( const std::string& id )
             _soldCars.try_emplace(std::move(id), std::move(it->second));
             //remove car from inventory
             _cars.erase(id);
+            std::cout << "Car with ID: " << id << " is Sold";
         }catch(...){
             std::cout << "Error while trying to sell Car\n";
         }
