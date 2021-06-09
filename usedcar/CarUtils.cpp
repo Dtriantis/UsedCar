@@ -13,15 +13,13 @@
 
 #include "CarUtils.hpp"
 
-using namespace CarUtils;
-
 const std::string CarUtils::currentPrice(double car_price, std::chrono::system_clock::time_point car_reg_time){
     try{
         //Compute time diff between adding on the car in shop until now
         auto time_now = std::chrono::system_clock::now();
         auto seconds = std::chrono::duration_cast<std::chrono::seconds>(time_now - car_reg_time );
         auto timeIntervalSellUntillNow = seconds.count();
-        
+
         if(timeIntervalSellUntillNow > 30){
             //Compute dynamic price
             double priceThreshold = car_price - car_price*0.2;
@@ -98,7 +96,7 @@ void CarUtils::sellUsedCar( UsedCarshop::CarShop & carShop) {
             while (std::cin.get() != '\n') ; // empty loop
         }
     }
-    carShop.sellCar(std::move( std::to_string(id)));
+    carShop.sellCar(std::move(std::to_string(id)));
 }
 
 const unsigned int CarUtils::getCurrentYear(){

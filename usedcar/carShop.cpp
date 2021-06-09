@@ -13,10 +13,7 @@
 #include "carShop.hpp"
 #include "CarUtils.hpp"
 
-//using namespace CarUtils;
-using namespace UsedCarshop;
-
-void CarShop::addCar ( Car car )
+void UsedCarshop::CarShop::addCar ( Car car )
 {
     std::string id;
     std::random_device rd;
@@ -37,7 +34,7 @@ void CarShop::addCar ( Car car )
     }
 }
 
-void CarShop::sellCar ( const std::string& id )
+void UsedCarshop::CarShop::sellCar ( const std::string& id )
 {
     //find car in _cars
     if ( _cars.find(id) == _cars.end() ) {
@@ -59,13 +56,13 @@ void CarShop::sellCar ( const std::string& id )
     }
 }
 
-std::optional<Car> CarShop::findCar(const std::string &id) const {
+std::optional<Car> UsedCarshop::CarShop::findCar(const std::string &id) const {
     auto it = _cars.find(id);
     if(it == _cars.end()){return std::nullopt;}
     return it->second;
 }
 
-double CarShop::daysEarning() {
+double UsedCarshop::CarShop::daysEarning() {
     double sum = 0;
     try{
         for (auto it = _soldCars.begin(); it != _soldCars.end(); it++ )
@@ -79,20 +76,20 @@ double CarShop::daysEarning() {
     return sum;
 }
 
-std::size_t CarShop::numberOfCars() const {
+std::size_t UsedCarshop::CarShop::numberOfCars() const {
     return _cars.size();
 }
 
-std::size_t CarShop::numberOfCarsSold() const {
+std::size_t UsedCarshop::CarShop::numberOfCarsSold() const {
     return _soldCars.size();
 }
 
-void CarShop::displayCars() const {
+void UsedCarshop::CarShop::displayCars() const {
     for(auto&& [id, car] : _cars){
         std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  CarUtils::currentPrice(car._price, car._registrationDateTime) <<  '\n';
     }
 }
-void CarShop::displayCarsSold() const {
+void UsedCarshop::CarShop::displayCarsSold() const {
     for(auto&& [id, car] : _soldCars){
         std::cout << "Car ID: " << id << '\n' << car._model << '\n' <<  car._year << '\n' <<  car._price <<  '\n';
     }

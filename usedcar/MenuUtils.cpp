@@ -8,10 +8,7 @@
 #include "MenuUtils.hpp"
 #include "CarUtils.hpp"
 
-using namespace menuUtils;
-using namespace CarUtils;
-
-void menuUtils::displayMenu() {
+void MenuUtils::displayMenu() {
     std::cout << "***************************************\n";
     std::cout << menu_option::add_car << ": Add a Car\n";
     std::cout << menu_option::sell_car << ": Sell a Car\n";
@@ -22,18 +19,18 @@ void menuUtils::displayMenu() {
     std::cout << "***************************************\n";
 }
 
-bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
+bool MenuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
     
-    switch( static_cast<unsigned int>(option) ) {
+    switch( option ) {
         case menu_option::add_car: {
-            addUsedCar( carShop );
-            menuUtils::displayMenu();
+            CarUtils::addUsedCar( carShop );
+            MenuUtils::displayMenu();
             break;
         }
         case menu_option::sell_car: {
             if( carShop.numberOfCars() > 0 ) {
-                sellUsedCar( carShop );
-                menuUtils::displayMenu();
+                CarUtils::sellUsedCar( carShop );
+                MenuUtils::displayMenu();
             } else {
                 std::cout << "\nThere are no cars in the Shop.\n";
             }
@@ -58,7 +55,7 @@ bool menuUtils::menuSelection( int option, UsedCarshop::CarShop & carShop ) {
             break;
         }
         case menu_option::display_menu: {
-            menuUtils::displayMenu();
+            MenuUtils::displayMenu();
             break;
         }
         case menu_option::quit: {

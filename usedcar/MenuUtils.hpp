@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "carShop.hpp"
 
-namespace menuUtils {
+namespace MenuUtils {
 
 enum menu_option {
     add_car = 1,
