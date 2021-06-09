@@ -37,12 +37,11 @@ void UsedCarshop::CarShop::addCar ( Car car )
 void UsedCarshop::CarShop::sellCar ( const std::string& id )
 {
     //find car in _cars
-    if ( _cars.find(id) == _cars.end() ) {
+    auto it = _cars.find(id);
+    if ( it == _cars.end() ) {
         std::cout << "Unable to find the car you want to sell\n";
     } else {
         try{
-            auto car = findCar(id);
-            auto it = _cars.find(id);
             //update the price with the price sold
             it->second._price = std::stod(CarUtils::currentPrice(it->second._price, it->second._registrationDateTime));
             //insert the car into sold cars map
@@ -58,7 +57,9 @@ void UsedCarshop::CarShop::sellCar ( const std::string& id )
 
 std::optional<Car> UsedCarshop::CarShop::findCar(const std::string &id) const {
     auto it = _cars.find(id);
-    if(it == _cars.end()){return std::nullopt;}
+    if( it == _cars.end() ){
+        return std::nullopt;
+    }
     return it->second;
 }
 
