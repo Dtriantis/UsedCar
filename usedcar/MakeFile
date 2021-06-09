@@ -1,0 +1,22 @@
+OBJ = main.o car.o carShop.o MenuUtils.o CarUtils.o
+
+usedcarshop: $(OBJ)
+	g++ -o usedcarshop $(OBJ) -g
+
+main.o: main.cpp
+	g++ -std=c++17 -Wall -c main.cpp -g
+
+car.o: car.cpp car.h
+	g++ -std=c++17 -Wall -c car.cpp -g
+
+carShop.o: carShop.cpp carShop.hpp
+	g++ -std=c++17 -Wall -c carShop.cpp -g
+
+MenuUtils.o: MenuUtils.cpp MenuUtils.hpp
+	g++ -std=c++17 -Wall -c MenuUtils.cpp -g
+
+CarUtils.o: CarUtils.cpp CarUtils.hpp
+	g++ -std=c++17 -Wall -c CarUtils.cpp -g
+
+clean:
+	rm -f $(OBJ) usedcarshop

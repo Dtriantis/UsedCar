@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include "carShop.hpp"
+#include "CarUtils.hpp"
 
 namespace MenuUtils {
 

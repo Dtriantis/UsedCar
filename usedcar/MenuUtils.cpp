@@ -6,7 +6,6 @@
 //
 
 #include "MenuUtils.hpp"
-#include "CarUtils.hpp"
 
 void MenuUtils::displayMenu() {
     std::cout << "***************************************\n";
